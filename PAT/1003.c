@@ -1,0 +1,98 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+//两个测试用例未通过
+//题目理解有误
+int main(){
+    int n,judge[10]={0},i,flag1,flag2,count1,count2,count3,j=0;
+    char c[101];
+    scanf("%d",&n);
+    while(n>0){
+        flag1=0;
+        flag2=0;
+        count1=0;
+        count2=0;
+        count3=0;
+        scanf("%s",c);
+        if(strlen(c)<3){
+            judge[j]=1;
+        }else{
+        for(i=0;c[i]!='\0';i++){
+            if(flag1==0){//读到P之前
+                if(c[i]!='P'){
+                    if(c[i]!='A'){
+                        judge[j]=1;//不满足
+                        break;
+                    }
+                    count1++;
+                }else{
+                    flag1=1;
+                }
+            }else{//读到P之后
+                    if(c[i]=='A'&&c[i+1]=='T'){//第二条
+                        i+=2;
+                        for(;c[i]!='\0';i++){
+                            if(c[i]!='A'){
+                                judge[j]=1;
+                                break;
+                            }else{
+                                count2++;
+                            }
+                        }
+                        if(count1!=count2){
+                            judge[j]=1;
+                            break;
+                        }
+                        break;
+                    }else if(c[i]=='A'&&c[i+1]=='A'){//第三条
+                        i=i+2;
+                        count3=1;
+                        if(c[i]=='A'){
+                            count3++;
+                            continue;
+                        }else if(c[i]=='T'){
+                            i++;
+                            flag2=1;
+                            for(;c[i]!='\0';i++){
+                                if(c[i]!='A'){
+                                    judge[j]=1;
+                                    break;
+                                }else{
+                                    count2++;
+                                }
+                            }
+                            if((count1*pow(2,count3))!=count2){//wrong
+                                judge[j]=1;
+                                break;
+                            }
+                            break;
+                        }else{
+                            judge[j]=1;
+                            break;
+                        }
+                    }else{
+                        judge[j]=1;//不满足
+                        break;
+                    }
+            }
+        }
+        if(flag1==0||flag2==0){
+            judge[j]=1;
+        }
+        }
+        n--;
+        j++;
+    }
+
+    //输出
+    for(i=0;i<j;i++){
+        //printf(" %d %d ",i,judge[i]);
+        if(judge[i]==0){
+            printf("YES\n");
+        }else{
+            printf("NO\n");
+        }
+    }
+    return 0;
+}
