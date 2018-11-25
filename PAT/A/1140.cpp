@@ -1,40 +1,35 @@
-#include<stdio.h>
-#include<string.h>
-int d;
-int n;
-int ans[10];//最多18位
-int count[10]={0};
+//题意说的很复杂。其实就是按序统计前一个字符串有连续几个相同的字符
+#include<iostream>
+#include<string>
+using namespace std;
 
-void check(int num){
-	if(num == n-1){
-		printf("%d%d",d,count[d]);
-		for(int i=0;i<10;i++){
-			if(count[i]!=0 && i!=d){
-				printf("%d%d",i,count[i]);
-			}
-		}
+int n;
+string d;
+
+void change(string s, int count){
+	if(count == n){
+		cout<<s<<endl;
 		return;
 	}
-	memset(ans,sizeof(ans),0);
-	for(int i=0;i<10;i++){
-		if(count[i]!=0){
-			ans[i] += 1;
-			ans[count[i]]++;
+	string temp = "";
+	int i, j, num;
+	for(i = 0; i < s.length(); i++){
+		num = 0;
+		temp += s[i];
+		for(j=i; j<s.length() ;j++){
+			if(s[j]!=s[i]){
+				break;
+			}else{
+				num++;
+			}
 		}
+		i = j-1;
+		temp += num + '0';
 	}
-	for(int i=0;i<10;i++){
-		count[i] = ans[i];
-	}
-	check(num+1);
+	change(temp, count+1);
 }
 int main(){
-	
-	scanf("%d %d", &d, &n);
-	count[d]++;
-	if(n==1){
-		printf("%d",d);
-	}else{
-		check(1); 
-	}
+	cin>>d>>n;
+	change(d,1);
 	return 0;
-}
+} 
