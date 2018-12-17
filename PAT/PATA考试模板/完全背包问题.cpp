@@ -22,7 +22,7 @@ int main(){
 			dp[j] = max(dp[j-w[i]]+v[i], dp[j]); 
 		}
 	} 
-	cout<<dp[VEC]; //答案为18，即选择所有的物品，背包不可被装满，最大 
+	cout<<dp[VEC]; //答案为66 
 	
 	return 0;
 }

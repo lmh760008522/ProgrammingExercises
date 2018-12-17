@@ -26,7 +26,7 @@ int main(){
 		}
 	} 
 	cout<<dp[7]; //答案为12，即选择重量为1，2，4的物品
-	cout<<endl<<dp[VEC];
+	cout<<endl<<dp[VEC]; //答案为-1， 不存在 
 	
 	return 0;
 }

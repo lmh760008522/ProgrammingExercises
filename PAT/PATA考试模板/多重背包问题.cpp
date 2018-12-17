@@ -18,7 +18,7 @@ int main(){
 	int k[MAX] = {1,2,7,31,12,14}; //每件物品的数量 
 	int dp[VEC+1] = {0}; //初始值为0 
 	
-	/*新增代码片*/ 
+	/*新增代码片*/  
 	vector<int> ww,vv; //新的体积和价值 
 	for(int i=0;i<MAX;i++){
 		int c = 1;
